@@ -8,9 +8,9 @@ Dir.chdir(ARGV[0])
 
 key_file = File.join(invoke_path, "review_key_#{timestamp}.txt")
 File.open(key_file, 'w') do |f|
-
   foreign_branches = `git branch --list -r`
   foreign_branches.split("\n").map(&:strip).each_with_index do |branch, index|
+    next if branch =~ /master$/
     puts "Fetching branch #{index}"
     f.puts "#{index}: #{branch}"
 
